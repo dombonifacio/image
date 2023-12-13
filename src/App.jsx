@@ -1,27 +1,23 @@
+import { useRoutes } from "react-router-dom";
 
-import { useRoutes } from "react-router-dom"
+import "./App.css";
 
-import './App.css'
-
-import { Images } from './pages/Images'
+import { Images } from "./pages/Images";
 import { Home } from "./pages/Home";
 
 function App() {
-  
-
   const element = useRoutes([
     {
       path: "/",
-      element: <Home />
+      element: <Home />,
     },
     {
       path: "/images",
-      element: <Images />
-    }
-  ])
+      element: <Images />,
+    },
+  ]);
 
- return element;
-  
+  return element;
 }
 
-export default App
+export default App;

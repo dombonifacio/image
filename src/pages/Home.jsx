@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   const [image, setImage] = useState("");
@@ -53,9 +54,9 @@ export const Home = () => {
   return (
     <div className="mx-auto h-screen p-[2rem] ">
       <div className="flex justify-end">
-        <a href="images.html" className="font-bold hover:text-slate-400">
+        <Link to={"/images"} className="font-bold hover:text-slate-400">
           See My Images
-        </a>
+        </Link>
       </div>
       <div className="flex items-center justify-center text-center h-full w-full">
         <div className="space-y-2 flex flex-col items-center">
