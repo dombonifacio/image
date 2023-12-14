@@ -1,30 +1,51 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Images = () => {
   const [image, setImage] = useState(null);
   const getImages = () => {
     axios
-      .get(
-        "https://08a4xi3fk0.execute-api.us-west-2.amazonaws.com/prod/image-uploader"
-      )
-      .then((res) => {
-        setImage(res.data.images[0].data);
-        console.log(res.data.images[0].data, "data");
-      })
-      .catch((error) => {
-        console.log(error, " error");
-      });
+    .get(
+      "https://ubadclkl4i.execute-api.us-west-2.amazonaws.com/prod/image-uploader"
+    )
+    .then((res) => {
+      const responseData = JSON.parse(res.data.body);
+      if (responseData && responseData.length > 0) {
+        setImage(responseData);
+      } else {
+        console.log("No images found in the response");
+      }
+    })
+    .catch((error) => {
+      console.log(error, " error");
+    });
   };
-  // useEffect(() => {
-  //     getImages()
-  // }, [])
+  useEffect(() => {
+      getImages()
+  }, [])
   return (
     <>
-      <button onClick={getImages} className="text-white text-4xl">
-        Get images
-      </button>
-      {image && <img src={`data:image/png;base64,${image}`} alt="image" />}
+     
+
+      <div className="mx-auto h-screen p-[2rem] ">
+      <div className="flex justify-end">
+        <Link to={"/"} className="font-bold hover:text-slate-400">
+          Upload an Image
+        </Link>
+      </div>
+      
+      <div className="flex   h-full items-center justify-center gap-x-6 w-full">
+        {image?.map((image, index) => (
+              <img
+                key={index}
+                src={`data:image/png;base64,${image.data}`}
+                alt={`image-${index}`}
+                className="h-48 w-48 object-cover"
+              />
+            ))}
+        </div>
+    </div>
     </>
   );
 };

@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 export const Home = () => {
   const [image, setImage] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
+  const [ success, setSuccess ] = useState(false)
+  const [ error, setError ] = useState(false)
   const handleFileSelect = (event) => {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -19,9 +21,6 @@ export const Home = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("image is received", image);
-  }, [image]);
 
   const uploadImage = async (base64Image) => {
     try {
@@ -29,7 +28,7 @@ export const Home = () => {
       const imageDataWithoutPrefix = base64Image.split(",")[1];
 
       const response = await axios.post(
-        "https://08a4xi3fk0.execute-api.us-west-2.amazonaws.com/prod/image-uploader",
+        "https://ubadclkl4i.execute-api.us-west-2.amazonaws.com/prod/image-uploader",
         imageDataWithoutPrefix, // Send only the base64-encoded image data
         {
           headers: {
@@ -38,10 +37,14 @@ export const Home = () => {
         }
       );
       console.log(imageDataWithoutPrefix, "image data without prefix");
+      setSuccess(true)
+      setImage(null)
+      setImagePreview(null)
 
       console.log(response); // Handle the response from the server
     } catch (error) {
       console.error("Error uploading image:", error);
+      setError(true)
     }
   };
 
@@ -98,6 +101,8 @@ export const Home = () => {
               className="object-cover z-10 rounded-full w-48 h-48 text-center "
             />
           )}
+          {success && <p className="text-green-400 font-bold">Image Upload Success!</p>}
+          {error && <p className="text-red-400 font-bold">Image Upload Error</p>}
         </div>
       </div>
     </div>
