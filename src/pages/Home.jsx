@@ -28,7 +28,7 @@ export const Home = () => {
       const imageDataWithoutPrefix = base64Image.split(",")[1];
 
       const response = await axios.post(
-        "https://ubadclkl4i.execute-api.us-west-2.amazonaws.com/prod/image-uploader",
+        "https://bsgkjybfob.execute-api.us-west-2.amazonaws.com/prod/image-uploader",
         imageDataWithoutPrefix, // Send only the base64-encoded image data
         {
           headers: {

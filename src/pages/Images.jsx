@@ -7,7 +7,7 @@ export const Images = () => {
   const getImages = () => {
     axios
     .get(
-      "https://ubadclkl4i.execute-api.us-west-2.amazonaws.com/prod/image-uploader"
+      "https://bsgkjybfob.execute-api.us-west-2.amazonaws.com/prod/image-uploader"
     )
     .then((res) => {
       const responseData = JSON.parse(res.data.body);
