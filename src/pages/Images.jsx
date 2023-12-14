@@ -10,12 +10,13 @@ export const Images = () => {
       "https://bsgkjybfob.execute-api.us-west-2.amazonaws.com/prod/image-uploader"
     )
     .then((res) => {
-      const responseData = JSON.parse(res.data.body);
-      if (responseData && responseData.length > 0) {
-        setImage(responseData);
-      } else {
-        console.log("No images found in the response");
-      }
+     
+      console.log(res.data, 'response')
+      // const responseData = JSON.parse(res.data);
+      // const getImages = res.data.images.map((image) => image)
+
+      // console.log(getImages, 'my images')
+     setImage(res.data.images)
     })
     .catch((error) => {
       console.log(error, " error");
